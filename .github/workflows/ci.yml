@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run unit tests
+        run: python -m pytest -q
+      - name: End-to-end run (simulate -> analyze)
+        run: |
+          python analysis/simulate.py --p 0.1667 --n 60 --seed 42 --out /tmp/example_observations.csv
+          python analysis/analyze.py --data /tmp/example_observations.csv --figures /tmp/figures --results /tmp/results

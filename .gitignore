@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Raw observations are personal data - never commit them.
+data/observations.csv
+
+# Local PNG copies (SVG figures are the committed format)
+figures/*.png
